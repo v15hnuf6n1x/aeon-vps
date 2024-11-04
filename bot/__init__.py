@@ -175,6 +175,8 @@ RCLONE_FLAGS = environ.get("RCLONE_FLAGS", "")
 if len(RCLONE_FLAGS) == 0:
     RCLONE_FLAGS = ""
 
+BASE_URL_PORT="8090
+
 DEFAULT_UPLOAD = environ.get("DEFAULT_UPLOAD", "")
 if DEFAULT_UPLOAD != "rc":
     DEFAULT_UPLOAD = "gd"
