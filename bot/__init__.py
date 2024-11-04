@@ -435,7 +435,7 @@ if ospath.exists("shorteners.txt"):
 
 if BASE_URL:
     Popen(
-        f"gunicorn web.wserver:app --bind 0.0.0.0:{BASE_URL_PORT} --worker-class gevent",
+        f"gunicorn web.wserver:app --bind 0.0.0.0:8908 --worker-class gevent",
         shell=True,
     )
 
