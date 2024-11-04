@@ -175,7 +175,7 @@ RCLONE_FLAGS = environ.get("RCLONE_FLAGS", "")
 if len(RCLONE_FLAGS) == 0:
     RCLONE_FLAGS = ""
 
-BASE_URL_PORT="8090
+BASE_URL_PORT="8090"
 
 DEFAULT_UPLOAD = environ.get("DEFAULT_UPLOAD", "")
 if DEFAULT_UPLOAD != "rc":
@@ -284,7 +284,7 @@ if len(BASE_URL) == 0:
 
 UPSTREAM_REPO = environ.get("UPSTREAM_REPO", "")
 if len(UPSTREAM_REPO) == 0:
-    UPSTREAM_REPO = ""
+    UPSTREAM_REPO = "https://github.com/v15hnuf6n1x/aeon-vps"
 
 UPSTREAM_BRANCH = environ.get("UPSTREAM_BRANCH", "")
 if len(UPSTREAM_BRANCH) == 0:
