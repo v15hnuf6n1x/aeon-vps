@@ -1,4 +1,4 @@
-FROM 5hojib/aeon:latest #v15hnuf6n1x/aeon:dev
+FROM v15hnuf6n1x/aeon:dev
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
