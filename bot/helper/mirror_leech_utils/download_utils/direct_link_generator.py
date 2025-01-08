@@ -560,14 +560,15 @@ def terabox(url, save_dir="HD_Video"):
     }
     details = {"contents": [], "title": '', "total_size": 0}
     for file in  files:
-      if len(file) <= 4:
-          return
+      if len(file) >= 4:
+          return 
+      details['total_size'] += file['size']
       parms2['fs_id'] = file.get('fs_id')
       name = file.get('name')
       thumb = file.get('image')
       try:
         response = post(url, json=parms2, headers=headers)
-        response.raise_for_status() 
+        response.raise_for_status()
         urll = response.json()
         details['title']= name
         if urll['status'] == 'success':
@@ -578,12 +579,13 @@ def terabox(url, save_dir="HD_Video"):
                 'filename': name, 
                 'path': path.join(name, save_dir)}
             details['contents'].append(deta)
-            sleep(2)
         else:
             raise DirectDownloadLinkError("ERROR: No valid download links found")
       except:
         DirectDownloadLinkError("ERROR: No valid download links found")
         return
+    if len(details["contents"]) == 1:
+        return details["contents"][0]["url"]
     return details
 
 
