@@ -570,7 +570,7 @@ def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
             url = ful.replace('terabox', '1024terabox')
             deta = {
                 'url': url, 
-                'name': name, 
+                'filename': name, 
                 'path': path.join(name, save_dir)}
             details['contents'].append(deta)
             sleep(2)
