@@ -438,10 +438,10 @@ def uploadee(url):
         return link[0]
     raise DirectDownloadLinkError("ERROR: Direct Link not found")
 
-
+"""
 def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
-    """Terabox direct link generator
-    https://github.com/Dawn-India/Z-Mirror"""
+    "Terabox direct link generator
+    https://github.com/Dawn-India/Z-Mirror"
 
     pattern = r"/s/(\w+)|surl=(\w+)"
     if not search(pattern, url):
@@ -507,6 +507,81 @@ def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
     if len(details["contents"]) == 1:
         return details["contents"][0]["url"]
 
+    return details
+"""
+
+def get_tera_files(url):
+    api_url = "https://teradl-1vbm.onrender.com//generate_file"
+    params1 = {
+        "mode": "2",  # Replace with the desired mode
+        "url": url    # Replace with the resource URL
+    }
+    response = post(api_url, json=params1)
+    if response.status_code == 200:
+        data = response.json()
+        if data['status'] == 'success':
+          js = data['js_token']
+          cook = data['cookie']
+          shareid = data['shareid']
+          uk = data['uk']
+          timestamp = data['timestamp']
+          sign = data['sign']
+          files = data['list']
+          fdata = {'js':js,'cookie': cook,'shareid': shareid,'uk':uk,'timestamp': timestamp,'sign' : sign,'files': files}
+          return fdata
+    else:
+        raise Exception(f"Failed  {response.status_code}")
+
+
+def teraboxx(url, video_quality="HD Video", save_dir="HD_Video"):
+    data = get_tera_files(url)
+    print('lv1')
+    js = data['js']
+    cook = data['cookie']
+    shareid = data['shareid']
+    uk = data['uk']
+    timestamp = data['timestamp']
+    sign = data['sign']
+    files = data['files']
+    parms2 = {
+        "mode": 2,
+        "js_token": js,
+        "cookie": cook,
+        "sign": sign,
+        "timestamp": timestamp,
+        "shareid": shareid,
+        "uk": uk
+    }
+    url = "https://teradl-1vbm.onrender.com/generate_link"
+    headers = {
+        "Content-Type": "application/json"  # Specify JSON payload
+    }
+    details = {"contents": [], "title": '', "total_size": 0}
+    for file in  files:
+      print(len(file))
+      parms2['fs_id'] = file.get('fs_id')
+      name = file.get('name')
+      thumb = file.get('image')
+      try:
+        print('try')
+        response = post(url, json=parms2, headers=headers)
+        response.raise_for_status() 
+        urll = response.json()
+        print(urll)
+        details['title']= name
+        if urll['status'] == 'success':
+            ful = urll['download_link']['url_1']
+            url = ful.replace('terabox', '1024terabox')
+            deta = {
+                'url': url, 
+                'name': name, 
+                'path': path.join(name, save_dir)}
+            details['contents'].append(deta)
+            print('i1')
+            sleep(2)
+      except:
+        DirectDownloadLinkError("ERROR: No valid download links found")
+        return
     return details
 
 

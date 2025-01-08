@@ -249,7 +249,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = "<b>Powered by GarudaMirror</b>\n\n"
+    msg = "<b>NOVA Bots</b>\n\n"
     button = None
     tasks = len(download_dict)
     current_time = get_readable_time(time() - bot_start_time)
@@ -273,20 +273,20 @@ def get_readable_message():
         ]:
             msg += f"<blockquote><code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n{download.processed_bytes()} of {download.size()}"
-            msg += f"\nSpeed: {download.speed()}"
-            msg += f"\nEstimated: {download.eta()}"
+            msg += f"\n<b>Speed:</b> {download.speed()}"
+            msg += f"\n<b>Estimated:</b> {download.eta()}"
             if hasattr(download, "seeders_num"):
                 with contextlib.suppress(Exception):
-                    msg += f"\nSeeders: {download.seeders_num()} | Leechers: {download.leechers_num()}"
+                    msg += f"\n<b>Seeders:</b> {download.seeders_num()} | <b>Leechers:</b> {download.leechers_num()}"
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"<blockquote>Size: {download.size()}"
-            msg += f"\nSpeed: {download.upload_speed()}"
-            msg += f"\nUploaded: {download.uploaded_bytes()}"
-            msg += f"\nRatio: {download.ratio()}"
-            msg += f"\nTime: {download.seeding_time()}"
+            msg += f"<blockquote><b>Size:</b> {download.size()}"
+            msg += f"\n<b>Speed:</b> {download.upload_speed()}"
+            msg += f"\n<b>Uploaded:</b> {download.uploaded_bytes()}"
+            msg += f"\n<b>Ratio:</b> {download.ratio()}"
+            msg += f"\n<b>Time:</b> {download.seeding_time()}"
         else:
-            msg += f"<blockquote>Size: {download.size()}"
-        msg += f"\nElapsed: {get_readable_time(time() - download.message.date.timestamp())}</blockquote>"
+            msg += f"<blockquote><b>Size:</b> {download.size()}"
+        msg += f"\n<b>Elapsed:</b> {get_readable_time(time() - download.message.date.timestamp())}</blockquote>"
         msg += f"\n<blockquote>/stop_{download.gid()[:8]}</blockquote>\n\n"
     if len(msg) == 0:
         return None, None
