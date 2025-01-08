@@ -533,9 +533,8 @@ def get_tera_files(url):
         raise Exception(f"Failed  {response.status_code}")
 
 
-def teraboxx(url, video_quality="HD Video", save_dir="HD_Video"):
+def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
     data = get_tera_files(url)
-    print('lv1')
     js = data['js']
     cook = data['cookie']
     shareid = data['shareid']
@@ -558,16 +557,13 @@ def teraboxx(url, video_quality="HD Video", save_dir="HD_Video"):
     }
     details = {"contents": [], "title": '', "total_size": 0}
     for file in  files:
-      print(len(file))
       parms2['fs_id'] = file.get('fs_id')
       name = file.get('name')
       thumb = file.get('image')
       try:
-        print('try')
         response = post(url, json=parms2, headers=headers)
         response.raise_for_status() 
         urll = response.json()
-        print(urll)
         details['title']= name
         if urll['status'] == 'success':
             ful = urll['download_link']['url_1']
@@ -577,7 +573,6 @@ def teraboxx(url, video_quality="HD Video", save_dir="HD_Video"):
                 'name': name, 
                 'path': path.join(name, save_dir)}
             details['contents'].append(deta)
-            print('i1')
             sleep(2)
       except:
         DirectDownloadLinkError("ERROR: No valid download links found")
