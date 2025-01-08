@@ -1,6 +1,8 @@
 from re import IGNORECASE, escape, search
 
-nsfw_keywords = [
+nsfw_keywords = []
+
+[
     "porn",
     "onlyfans",
     "nsfw",

@@ -33,7 +33,7 @@ class _BotCommands:
         self.SpeedCommand = f"speedtest{i}"
         self.AddImageCommand = f"addimg{i}"
         self.ImagesCommand = f"images{i}"
-        self.MediaInfoCommand = f"mediainfo{i}"
+        self.MediaInfoCommand = [f"mediainfo{i}", f"mi{i}"]
         self.BroadcastCommand = [f"broadcast{i}", "broadcastall"]
 
 

@@ -84,6 +84,7 @@ domain_dict = {
         "terabox.app",
         "gibibox.com",
         "goaibox.com",
+        "terafileshare.com",
         "terasharelink.com",
         "teraboxlink.com",
         "freeterabox.com",
