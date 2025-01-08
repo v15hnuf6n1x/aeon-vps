@@ -249,7 +249,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = "<b>NOVA Bots</b>\n\n"
+    msg = "<b><center>Tera Downloader</center></b>\n\n"
     button = None
     tasks = len(download_dict)
     current_time = get_readable_time(time() - bot_start_time)

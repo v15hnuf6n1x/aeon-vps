@@ -440,6 +440,7 @@ def uploadee(url):
     raise DirectDownloadLinkError("ERROR: Direct Link not found")
 
 """
+
 def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
     "Terabox direct link generator
     https://github.com/Dawn-India/Z-Mirror"
@@ -509,6 +510,7 @@ def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
         return details["contents"][0]["url"]
 
     return details
+
 """
 
 def get_tera_files(url):
@@ -534,7 +536,7 @@ def get_tera_files(url):
         raise Exception(f"Failed  {response.status_code}")
 
 
-def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
+def terabox(url, save_dir="HD_Video"):
     data = get_tera_files(url)
     js = data['js']
     cook = data['cookie']
@@ -558,6 +560,8 @@ def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
     }
     details = {"contents": [], "title": '', "total_size": 0}
     for file in  files:
+      if len(file) <= 4:
+          return
       parms2['fs_id'] = file.get('fs_id')
       name = file.get('name')
       thumb = file.get('image')
@@ -575,6 +579,8 @@ def terabox(url, video_quality="HD Video", save_dir="HD_Video"):
                 'path': path.join(name, save_dir)}
             details['contents'].append(deta)
             sleep(2)
+        else:
+            raise DirectDownloadLinkError("ERROR: No valid download links found")
       except:
         DirectDownloadLinkError("ERROR: No valid download links found")
         return

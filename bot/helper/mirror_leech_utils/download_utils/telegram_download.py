@@ -114,7 +114,7 @@ class TelegramDownloadHelper:
             message = await user.get_messages(
                 chat_id=message.chat.id, message_ids=message.id
             )
-
+            
         media = getattr(message, message.media.value) if message.media else None
 
         if media is not None:
